@@ -1,0 +1,61 @@
+body{
+    align-content: center;
+    margin-top: 80px;
+}
+.main{
+    margin: 40px 200px 20px 200px;
+}
+.main canvas{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: rgb(203, 219, 248);
+}
+
+/* slider  .... */
+
+.slidecontainer {
+    width: 100%;
+    margin-bottom: 12px;
+  }
+  
+   .slider {
+    -webkit-appearance: none;
+    width: 25%;
+    height: 25px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+  }
+  
+  .slider:hover {
+    opacity: 1;
+    cursor: pointer;
+  }
+  
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: #4CAF50;
+    cursor: pointer;
+  }
+  
+  .slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: #4CAF50;
+    cursor: pointer;
+  }
+  
+  .slidecontainer #slider{
+      cursor: pointer;
+  }
+
+
+button{
+    position: relative;
+    margin-left: 12px;
+}
