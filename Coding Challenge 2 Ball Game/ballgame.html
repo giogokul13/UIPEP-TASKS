@@ -1,0 +1,28 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/styles.css">
+    <title>Bouncing ball</title>
+    <script src="BallGameJs.js"></script>
+</head>
+<body> 
+    <center>
+    <div class="main">
+        <h1>Ball Game Challenge</h1>
+        <div class="controls">
+            <div class="slidecontainer">
+                <input type="range" min="0" max="100" value="10" step="1" id="slider"> <b><span id="speed"></span></b>
+            </div>              
+            <button title="Resume the animation" id="startButton">Play</button>
+            <button title="Pause the animation" id="pauseButton">Pause</button>
+        </div>
+            <canvas width="700" height="500" id="canvas"></canvas> <br>
+            <b>
+            <label for="HitCounter">Pause to Watch the NO,Of Ball & Wall Collision in last 1 sec  :  </label>
+            <label id="HitCounter"></label> </b>
+           
+    </div>
+    </center>
+</body>
+</html>
