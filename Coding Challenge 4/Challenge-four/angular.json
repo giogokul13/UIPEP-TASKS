@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "Challenge-four"
+    }
+  },
+  "defaultProject": "Challenge-four",
+  "cli": {
+    "analytics": "207753cf-7cb9-4521-a56e-33f54dde9043"
+  }
 }
