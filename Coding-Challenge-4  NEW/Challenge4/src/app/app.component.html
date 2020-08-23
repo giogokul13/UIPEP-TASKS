@@ -1,4 +1,15 @@
- <a routerLink="/">HOME</a> 
- <a routerLink="/login">LOGIN</a> 
- <a routerLink="/register">REGISTER</a> 
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand">Coding Challenge 4</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link active" routerLink="/">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" routerLink="/login">Login</a>
+        <a class="nav-link" routerLink="/register">Register</a>
+      </div>
+    </div>
+  </nav>
+
 <router-outlet>  </router-outlet>
