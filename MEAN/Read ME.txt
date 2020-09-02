@@ -1,0 +1,11 @@
+This coding Challenge 4 
+
+created a real db in mongo DB 
+
+express server for middleware and api's
+
+folder Back-End consists of the real working BackEnd 
+
+folder Front-End consists  of the front end angular 
+
+folder Server is tested for backend  and found with few error so switched to Folder Back-End  
