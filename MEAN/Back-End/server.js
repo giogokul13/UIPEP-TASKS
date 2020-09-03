@@ -26,6 +26,6 @@ app.get('/',(req,res) =>{
     res.send("this is the home page of server");
 })
 
-app.listen(3000,function(){
-    console.log("server running @ port 3000");
+app.listen(5000,function(){
+    console.log("server running @ port 5000");
 })

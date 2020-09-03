@@ -1,12 +1,9 @@
 const router = require('express').Router() ;
 const UserModel = require('../Model/usermodel');
 const bycrypt = require('bcryptjs');
-const User = require('../../Server/Model/user');
 const jwt = require('jsonwebtoken');
 const verify = require('../verifytoken');
-const { json } = require('body-parser');
 const PostModel = require('../Model/Posts');
-const user = require('../../Server/Model/user');
 
 // register  api
 
@@ -95,14 +92,30 @@ router.post('/post',verify,(req,res) =>{
         res.json({ success : false , msg : " Post should not be empty"});
         return false;
     }
+    if(req.body.place === undefined){
+        res.json({ success : false , msg : " Place should not be empty"});
+        return false;
+    }
 
     const Post = new PostModel({
-        user : user.username,
+        userid : req.user._id,
+        user : req.user.username,
         time : Date.now(),
         post : req.body.post,
         place : req.body.place
     });
+    Post.save();
+    res.status(200);
+    res.json({
+        success : true ,
+        msg : "Post submitted Successfully !!..",
+        Post
+    });
+});
 
-})
+
+// router.get('/post',verify,(req,res) =>{
+//     res.send("success");
+// })
 
 module.exports = router;
