@@ -5,6 +5,8 @@ const User = require('../../Server/Model/user');
 const jwt = require('jsonwebtoken');
 const verify = require('../verifytoken');
 const { json } = require('body-parser');
+const PostModel = require('../Model/Posts');
+const user = require('../../Server/Model/user');
 
 // register  api
 
@@ -85,6 +87,22 @@ router.get('/profile',verify,(req,res) => {
     // let user = User.findOne({_id : req.user});
     // res.send(user);
     res.send(req.user);
+})
+
+router.post('/post',verify,(req,res) =>{
+    const post = req.body.post
+    if(post === undefined){
+        res.json({ success : false , msg : " Post should not be empty"});
+        return false;
+    }
+
+    const Post = new PostModel({
+        user : user.username,
+        time : Date.now(),
+        post : req.body.post,
+        place : req.body.place
+    });
+
 })
 
 module.exports = router;
