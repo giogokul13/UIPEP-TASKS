@@ -113,9 +113,13 @@ router.post('/post',verify,(req,res) =>{
     });
 });
 
-
-// router.get('/post',verify,(req,res) =>{
-//     res.send("success");
-// })
+router.get('/dashboard',verify,(req,res) =>{
+    // res.send("dashboard appears perfectly when you are logged in");
+    PostModel.find({}).exec((err,data) =>{
+        if(err) { console.log(err);}
+        else { 
+            res.send({data})}
+    });
+});
 
 module.exports = router;
