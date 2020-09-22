@@ -7,7 +7,11 @@ const PostSchema = new schema({
     user : String,
     time : Date,
     post : String,
-    place : String
+    place : String,
+    likes : Number,
+    likedby : Array,
+    comment : String,
+    commentby : Array
 });
 
 const  Post = module.exports = mongoose.model('Post',PostSchema);
