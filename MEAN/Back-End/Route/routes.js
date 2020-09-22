@@ -122,4 +122,11 @@ router.get('/dashboard',verify,(req,res) =>{
     });
 });
 
+
+router.put('/like',verify,(req,res) =>{
+    
+
+});
+
+
 module.exports = router;
