@@ -4,6 +4,8 @@ const bycrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const verify = require('../verifytoken');
 const PostModel = require('../Model/Posts');
+const Post = require('../Model/Posts');
+const user = require('../Model/usermodel');
 
 // register  api
 
@@ -102,7 +104,7 @@ router.post('/post',verify,(req,res) =>{
         user : req.user.username,
         time : Date.now(),
         post : req.body.post,
-        place : req.body.place
+        place : req.body.place,
     });
     Post.save();
     res.status(200);
@@ -118,15 +120,93 @@ router.get('/dashboard',verify,(req,res) =>{
     PostModel.find({}).exec((err,data) =>{
         if(err) { console.log(err);}
         else { 
-            res.send({data})}
+            res.send({data})};
     });
 });
 
+//like
 
 router.put('/like',verify,(req,res) =>{
-    
-
+    PostModel.findOne( { _id : req.body._id} ,(err , post ) =>{
+        if(err){
+             res.json({success : false , msg : "invalid post id"});
+            }
+            else{
+                if(!post){
+                    res.json({ success : false , msg : "Post not found"});
+                }
+                else{
+                    if(PostModel.likedBy.includes(user.username)){
+                        res.json({ success : false , msg : "you have already liked"});
+                    }
+                    else{
+                        post.likes++ ;
+                        post.likedBy.push(user.username);
+                        post.save((err)=>{
+                            if(err){
+                                res.json({ success : false , msg : "something went wrong " });
+                            }
+                            else{
+                                res.json({ success : true , msg : " Blog liked"});
+                            }
+                        });
+                    }
+            }
+            }
+    });
 });
+
+// comment 
+
+router.post('/comment',verify,(req,res) =>{
+    if(!req.body.comment){
+        res.json({ success : false , msg : " no Commnet provided"});
+    }
+    else{
+        if(!req.body._id){
+            res.json({ success : false , msg : " no id was provided"});
+        }
+        else{
+            Post.findOne( { _id : req.body._id} , (err ,post) =>{
+                if(err){
+                    res.json({ success : false , msg : "no id found /matched"});
+                }
+                else{
+                    if(!post){
+                        res.json({ success : false , msg : "no post avilable"});
+                    }
+                    user.findOne( { _id : req.decoded.userid} , (err , user) =>{
+                        if(err){
+                            res.json({ success : false , msg : "something went wrong"});
+                        }
+                        else{
+                            if(!user){
+                                res.json({ success : false , msg : " User not found "});
+                            }
+                            else{
+                                post.comments.push({
+                                    comment : req.body.comment,
+                                    commentator : user.username
+                                });
+                                post.save((err) =>{
+                                    if (err) {
+                                        res.json({ success : false , msg : "something went wrong."});
+                                    }
+                                    else{
+                                        res.json({ success : true , msg : "comment saved successfully.."});
+                                    }
+                                })
+                            }
+
+                        }
+                    });
+                }
+            });
+        }
+    }
+});
+
+
 
 
 module.exports = router;
