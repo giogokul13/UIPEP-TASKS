@@ -8,10 +8,12 @@ const PostSchema = new schema({
     time : Date,
     post : String,
     place : String,
-    likes : Number,
-    likedby : Array,
-    comment : String,
-    commentby : Array
+    likes : String,
+    likedBy : Array,
+    comments : [{
+        comment : String,
+        commentator : String
+    }]
 });
 
 const  Post = module.exports = mongoose.model('Post',PostSchema);
