@@ -120,7 +120,9 @@ router.get('/dashboard',verify,(req,res) =>{
     PostModel.find({}).exec((err,data) =>{
         if(err) { console.log(err);}
         else { 
-            res.send({data})};
+
+            res.send({data});
+        };
     });
 });
 
@@ -159,15 +161,16 @@ router.put('/like',verify,(req,res) =>{
 // comment 
 
 router.post('/comment',verify,(req,res) =>{
+    console.log('comment');
     if(!req.body.comment){
         res.json({ success : false , msg : " no Commnet provided"});
     }
     else{
-        if(!req.body._id){
+        if(!req.body.pid){
             res.json({ success : false , msg : " no id was provided"});
         }
         else{
-            Post.findOne( { _id : req.body._id} , (err ,post) =>{
+            PostModel.findOne( { _id : req.body.pid} , (err ,post) =>{
                 if(err){
                     res.json({ success : false , msg : "no id found /matched"});
                 }
@@ -175,9 +178,10 @@ router.post('/comment',verify,(req,res) =>{
                     if(!post){
                         res.json({ success : false , msg : "no post avilable"});
                     }
-                    user.findOne( { _id : req.decoded.userid} , (err , user) =>{
+                    // console.log(req.user._id);
+                    UserModel.findOne( { _id : req.body.userid} , (err , user) =>{
                         if(err){
-                            res.json({ success : false , msg : "something went wrong"});
+                            res.json({ success : false , msg : "error on finding user"});
                         }
                         else{
                             if(!user){
@@ -188,12 +192,14 @@ router.post('/comment',verify,(req,res) =>{
                                     comment : req.body.comment,
                                     commentator : user.username
                                 });
+         
                                 post.save((err) =>{
                                     if (err) {
-                                        res.json({ success : false , msg : "something went wrong."});
+                                        res.json({ success : false , msg : "something went wrong.while storing"});
                                     }
                                     else{
-                                        res.json({ success : true , msg : "comment saved successfully.."});
+                                        res.json({ success : true , msg : "comment saved successfully..",post} );
+                                        
                                     }
                                 })
                             }
@@ -205,8 +211,5 @@ router.post('/comment',verify,(req,res) =>{
         }
     }
 });
-
-
-
 
 module.exports = router;
