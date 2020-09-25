@@ -161,7 +161,7 @@ router.put('/like',verify,(req,res) =>{
 // comment 
 
 router.post('/comment',verify,(req,res) =>{
-    console.log('comment');
+    // console.log('comment');
     if(!req.body.comment){
         res.json({ success : false , msg : " no Commnet provided"});
     }
@@ -190,7 +190,7 @@ router.post('/comment',verify,(req,res) =>{
                             else{
                                 post.comments.push({
                                     comment : req.body.comment,
-                                    commentator : user.username
+                                    commentator : user.username         
                                 });
          
                                 post.save((err) =>{
