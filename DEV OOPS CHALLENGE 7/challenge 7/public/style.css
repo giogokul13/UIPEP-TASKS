@@ -33,3 +33,21 @@ video{
     justify-content: center;
     align-items: center;
 }
+.main-controls{
+    display: flex;
+    background-color: #1c1e20;
+    color: blanchedalmond;
+    padding: 5px;
+}
+.main-controls-block{
+    display: flex;
+}
+.main-controls-buttons{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 10px;
+    min-width: 8px;
+    cursor: pointer;
+}
