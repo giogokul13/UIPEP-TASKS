@@ -7,7 +7,7 @@ myVideo.muted = true;
 var peer = new Peer(undefined,{
     path : '/peerjs',
     host : '/',
-    port : '3000'
+    port : '443'
 }); 
 
 
@@ -47,16 +47,12 @@ $('html').keydown( (e) =>{
    
 });
 
-// socket.on('createmessage', message =>{
-//     // console.log("this is coming from server:  " + message );
-//     $('ul').append(`<li class = "message"><b>user</b> </br> ${message} </li>`);
-//     scrolltobottom();
-// });
-
 })
 
 
-
+socket.on('disconnect', () => {
+    socket.to(roomId).broadcast.emit('user-disconnected', userId)
+  })
 
 peer.on('open' ,id =>{
     socket.emit('join-room',ROOM_ID,id);
@@ -121,6 +117,33 @@ socket.on('createmessage', message =>{
           <span>Unmute</span>
         `
         document.querySelector('.main__mute_button').innerHTML = html;
+      }
+
+      const playStop = () => {
+        let enabled = myVideoStream.getVideoTracks()[0].enabled;
+        if (enabled) {
+          myVideoStream.getVideoTracks()[0].enabled = false;
+          setPlayVideo()
+        } else {
+          setStopVideo()
+          myVideoStream.getVideoTracks()[0].enabled = true;
+        }
+      }
+
+      const setStopVideo = () => {
+        const html = `
+          <i class="fas fa-video"></i>
+          <span>Stop Video</span>
+        `
+        document.querySelector('.main__video_button').innerHTML = html;
+      }
+      
+      const setPlayVideo = () => {
+        const html = `
+        <i class="stop fas fa-video-slash"></i>
+          <span>Play Video</span>
+        `
+        document.querySelector('.main__video_button').innerHTML = html;
       }
 
 

@@ -33,10 +33,13 @@ io.on('connection',socket =>{
         socket.on('message' , message =>{
             io.to(roomid).emit('createmessage' , message);
         });
+        socket.on('disconnect', () => {
+            socket.to(roomid).broadcast.emit('user-disconnected', userid)
+          })
     });
 });
 
 
-server.listen(3000,()=>{
+server.listen(process.env.PORT||3000,()=>{
     console.log("meeting started....")
 });
