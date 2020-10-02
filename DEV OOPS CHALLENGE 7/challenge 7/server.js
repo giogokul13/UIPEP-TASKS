@@ -29,6 +29,10 @@ io.on('connection',socket =>{
         console.log("joined room");
         socket.join(roomid);
         socket.to(roomid).broadcast.emit('user-connected', userid);
+
+        socket.on('message' , message =>{
+            io.to(roomid).emit('createmessage' , message);
+        });
     });
 });
 
