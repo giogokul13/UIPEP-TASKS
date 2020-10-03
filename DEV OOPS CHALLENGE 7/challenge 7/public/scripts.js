@@ -7,7 +7,7 @@ myVideo.muted = true;
 var peer = new Peer(undefined,{
     path : '/peerjs',
     host : '/',
-    port : '443'
+    port : '3000' || 'process.env.PORT'
 }); 
 
 
@@ -36,7 +36,7 @@ socket.on('user-connected', (userid)=>{
 })
 
 let text = $('input');
-// console.log(text);
+console.log(text);
 
 $('html').keydown( (e) =>{
     if (e.which == 13  && text.val().length !==0){ // 13 is for key enter 
